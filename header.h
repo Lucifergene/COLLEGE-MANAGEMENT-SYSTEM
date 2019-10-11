@@ -9,7 +9,7 @@
 #include <unistd.h>							//For usleep() function
 #define delay(x) usleep(x*1000)				//For Windows delay function
 #define CLS() cout<<"\033[2J\033[1;1H"		//ANSI Escape sequence for clearing screen
-#define RULE(x) cout<<'\n'; for(int _=0;_<80;_++) cout<<x; cout<<'\n'
+#define RULE(x) cout<<'\n'; for(int i=0;i<80;i++) cout<<x; cout<<'\n'
 using namespace std;
 int login();
 void gotoxy(int x,int y)					//gotoxy function for UNIX
@@ -18,7 +18,7 @@ void gotoxy(int x,int y)					//gotoxy function for UNIX
 }
  
 void load()
-{								//Loader function [c-p cp]
+{							
 	CLS();
 	std::cout<<"\n\n\n\n\t\t\t\t  Loading\n\n";
 	for (int i=0;i<80;i++){
@@ -27,10 +27,9 @@ void load()
 		std::cout<<"!";
 		std::cout.flush();						//Flush output buffer for delay()
 		gotoxy(i+1,7);						//Bottom Loading line
-		delay((rand()%80) + 20);
+		delay(10);
 	}
 	std::cout.flush();
-	delay(200);
 }
 
 int scan()
@@ -84,10 +83,9 @@ void load()
 		std::cout<<"!";
 		std::cout.flush();						//Flush output buffer for delay()
 		gotoxy(i+1,7);						//Bottom Loading line
-		delay((rand()%80) + 20);
+		delay(10);
 	}
 	std::cout.flush();
-	delay(200);
 }
 
 int scan()
@@ -110,13 +108,3 @@ int scan()
 }
 #endif
 //======================================//
-
-
-
-
-
-
-
-
-
-
