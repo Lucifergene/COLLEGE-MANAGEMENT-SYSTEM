@@ -442,7 +442,7 @@ int searchGradeByRollNo(int i)
 }
 
 /*================================================================================*/
-//PLACEMENT CELL ------->>DIBYAJYOTI
+//PLACEMENT CELL ------->>DIBYA & AMLAN
 
 // Students details class.
 class Students
@@ -571,7 +571,7 @@ class placement
     }
     
 /*================================================================================*/
-// LIBRARY MANAGEMENT UNDER UNIVERSITY MANAGEMENT SYSTEM ------------->>Vaibhav
+// LIBRARY MANAGEMENT UNDER UNIVERSITY MANAGEMENT SYSTEM ------------->>Vaibhav, Siladitya, Aniket, Vivek
 
 class Library
 {
@@ -2163,7 +2163,7 @@ void Library::returnBook()
 }    
 
 /*================================================================================*/
-//FACULTY MANAGEMENT ----> SWARNAVA   
+//FACULTY MANAGEMENT ----> SWARNAVA & JYOTEERMAYA
 class teacher
 {
     int a;
