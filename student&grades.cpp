@@ -1,13 +1,13 @@
-#include<bits/stdc++.h>	
+#include<bits/stdc++.h>
 #include "header.h"
-#define FLBSTUD "student.txt"	
-#define FLBGRAD "grade.txt"	
+#define FLBSTUD "student.txt"
+#define FLBGRAD "grade.txt"
 using namespace std;
 
 
 
-class Student 
-{						
+class Student
+{
 	int title;  //Master  = 1, Mr = 2, Miss = 3
 	char studentName[30];
 	int rollNo;
@@ -16,11 +16,11 @@ class Student
 	char address[80];
 	char bloodGroup[4];
 	public:
-		
-	void getDetails();	
-	
+
+	void getDetails();
+
 	char * strTitle(int x)  	//Converting Title from Integer to readable text
-	{			
+	{
 		static char title[8] = " ";
 		if(x==1)
 			strcpy(title,"Master");
@@ -29,10 +29,10 @@ class Student
 		else
 			strcpy(title,"Miss");
 		return title;
-	}		
-	
+	}
+
 	void printDetails()
-	{		
+	{
 		cout<<"Student Name  : "<<strTitle(title)<<' '<<studentName<<endl;
 		cout<<"Roll No.      : "<<rollNo<<endl;
 		cout<<"Father's Name : "<<fatherName<<endl;
@@ -64,13 +64,13 @@ class Student
 };
 
 void Student::getDetails()
-{			
+{
 	system("CLS");
 	cout<<"Enter Title \n(Master = 1, Mr = 2, Miss = 3)  : ";
 	do{
 		title = scan();
 	}while(title!=1 && title!=2 && title!=3);
-	
+
 	cout<<"Enter Student Name        : ";
 	do{
 		gets(studentName);
@@ -91,15 +91,15 @@ void Student::getDetails()
 	do{
 		gets(address);
 	}while(strlen(address)==0);
-	
+
 	cout<<"Enter Blood Group [eg. B+]: ";
 	do{
-		gets(bloodGroup);			
+		gets(bloodGroup);
 	}while(strlen(bloodGroup)==0);
 }
 
 void insertStudent()			//Insert Student Record in File
-{			
+{
 	system("CLS");
 	Student obj,obj2;
 	char ch;
@@ -109,7 +109,7 @@ void insertStudent()			//Insert Student Record in File
 	fstream fl1(FLBSTUD, ios::in|ios::binary);
 	ofstream fl2;
 	if(!fl1)			//If file does not exist, create new file
-	{					
+	{
 		fl2.open(FLBSTUD,ios::out|ios::binary);
 		fl2.write((char*)&obj, sizeof(obj));
 		fl2.close();
@@ -124,7 +124,7 @@ void insertStudent()			//Insert Student Record in File
 			break;
 		}
 		if(obj.retRollNo()==obj2.retRollNo())		//If record with same Roll No. exists, then abort insertion
-		{		
+		{
 			cout<<"Record with same Roll No. with following details already exists : \n";
 			obj2.printDetails();
 			cout<<"Insertion Aborted !\n";
@@ -161,7 +161,7 @@ void insertStudent()			//Insert Student Record in File
 
 
 int dispStudentRecord()		//Display all Student Records
-{		
+{
 	system("CLS");
 	Student obj;
 	int v=0;
@@ -212,7 +212,7 @@ int searchByRollNo(int i)
 		{
 			if(!found)
 				cout<<"\nSearch Results : \n\n";
-				
+
 			obj.printDetails();
 			RULE('-');
 			found = 1;
@@ -227,7 +227,7 @@ int searchByRollNo(int i)
 
 
 void delStudentRecord()
-{			
+{
 	system("CLS");
 	Student obj;					//Writes to new file except record to be deleted
 	int f=0;
@@ -251,7 +251,7 @@ void delStudentRecord()
 			}while(ch!='N' && ch!='Y');
 			if(ch=='N'){
 				cout<<"Deletion Aborted !\n";
-				
+
 				fl.close();
 				fo.close();
 				remove("temp.dat");
@@ -274,6 +274,7 @@ void delStudentRecord()
 
 
 /*================================================================================*/
+//SHIVAM'S CODE
 
 class Grade
 {
@@ -282,7 +283,7 @@ class Grade
         int   rollNo;
         int   total;
         float perc;
-    public:    	
+    public:
     	int retRollNo()
 		{ return rollNo; }
 		void retGrade(float marks)
@@ -321,7 +322,7 @@ void Grade::getDetails(void)
 	cout << "Enter Roll No. :";
     cin >> rollNo;
     cout << "Enter Full Name: " ;
-    cin >> name;    
+    cin >> name;
     cout << "Enter Total Marks (500) : ";
     cin >> total;
     perc=(float)total/500*100;
@@ -337,7 +338,7 @@ void Grade::putDetails(void)
 }
 
 void insertGrade()			//Insert Grade  in File
-{			
+{
 	system("CLS");
 	Grade obj,obj2;
 	char ch;
@@ -345,8 +346,8 @@ void insertGrade()			//Insert Grade  in File
 	obj.getDetails();
 	fstream gl1(FLBGRAD, ios::in|ios::binary);
 	ofstream gl2;
-	if(!gl1)			
-	{					
+	if(!gl1)
+	{
 		gl2.open(FLBGRAD,ios::out|ios::binary);
 		gl2.write((char*)&obj, sizeof(obj));
 		gl2.close();
@@ -364,7 +365,7 @@ void insertGrade()			//Insert Grade  in File
 
 
 int dispGrade()		//Display all Student Records
-{		
+{
 	system("CLS");
 	Grade obj;
 	int v=0;
@@ -390,7 +391,7 @@ int dispGrade()		//Display all Student Records
 }
 
 int searchGradeByRollNo(int i)
-{			
+{
 	system("CLS");
 	int r;
 	int found=0;
@@ -413,7 +414,7 @@ int searchGradeByRollNo(int i)
 		{
 			if(!found)
 				cout<<"\nSearch Results : \n\n";
-				
+
 			obj.putDetails();
 			RULE('-');
 			found = 1;
@@ -426,14 +427,142 @@ int searchGradeByRollNo(int i)
 }
 
 /*================================================================================*/
+//DIBYA'S CODE
 
+// Students details class.
+class Students
+  {
+	long roll;
+	float cgpa;
+	char sname[25];
+public:
+	void getSData();
+	long sroll();
+	float scgpa();
+	char* ssname();
+  };
+
+
+  void Students::getSData()
+    {
+
+    cout<<"Enter the Students name \n";
+    cin>>sname;
+    cout<<"Enter the Students roll number \n";
+    cin>>roll;
+    cout<<"Enter the cgpa \n";
+    cin>>cgpa;
+
+    }
+    long Students ::sroll()
+    {
+      return roll;
+    }
+
+    float Students :: scgpa()
+    {
+      return cgpa;
+    }
+
+    char* Students :: ssname()
+    {
+      return sname;
+    }
+
+  // class company details
+class company
+   {
+	   char name[20];
+	   int package;
+	   float cgpa;
+	public:
+	   void getCData();
+	   friend class Students;
+	   char* cname();
+	   int cpackage();
+	   float ccgpa();
+   };
+
+	void company :: getCData()
+	{
+		 cout<<"Enter the company name \n";
+		 cin>>name;
+		 cout<<"Enter the package (in lakhs)\n";
+		 cin>>package;
+		 cout<<"CGPA required"<<endl;
+		 cin>>cgpa;
+	}
+
+	char* company ::  cname()
+	{
+		return name;
+	}
+
+	int company:: cpackage()
+	{
+	  	return package;
+	}
+    float company::ccgpa()
+    {
+      	return cgpa;
+    }
+
+ // Students qualified for placement
+class placement
+	{
+		char *name;
+		char *cname;
+		long rollnumber;
+	public:
+		void putPlacementData(char *Name,char *Cname,long Rollnumber);
+		void getData();
+	};
+
+	 void placement :: putPlacementData(char *Name,char *Cname,long Rollnumber)
+	   {
+	       name=Name;
+	       cname=Cname;
+	       rollnumber=Rollnumber;
+	   }
+
+	   void placement :: getData()
+	   {
+	    cout<<"DETAILS";
+	    RULE('-');
+	    cout<<"\nName: "<<name<<endl;
+	    cout<<"Roll Number: "<<rollnumber<<endl;
+	   }
+
+    // Students placed class
+
+    class splaced
+    {
+      char name[25];
+      char cname[20];
+      int package;
+      long rollnumber;
+    public:
+        void getpData();
+        void putpData();
+    };
+
+    void splaced:: getpData()
+    {
+
+    }
+    void splaced:: putpData()
+    {
+
+    }
+
+/*================================================================================*/
 int main()
 {
     int a=1,w;
     ifstream file1;
     ofstream file2;
     Grade g1;
-        
+
     char ch;
 	char ch1;
 	int ch2;
@@ -445,6 +574,7 @@ int main()
 		RULE("*");
 		cout<<"\t1. Admission Details.\n";
 		cout<<"\t2. Grading System.\n";
+		cout<<"\t3. Placement Cell.\n";
 		cout<<"\t0. Exit.\n\n";
 		cout<<"Enter your choice : ";
 		fflush(stdin);
@@ -464,11 +594,11 @@ int main()
 
                 cout<<"\t1.  Register Student\n";
                 cout<<"\t2.  Display all Records.\n";
-                cout<<"\t3.  Search for a Record\n";                                      
+                cout<<"\t3.  Search for a Record\n";
                 cout<<"\t4.  Delete a Record.\n";
                 cout<<"\t0.  Exit.\n";
                 cout<<"\nEnter your choice : ";
-						
+
                 cin>>ch2;
                 switch(ch2)
                 {
@@ -480,12 +610,12 @@ int main()
                         break;
                     case 3:
                         searchByRollNo(2);
-                        break;                    
+                        break;
                     case 4:
                         delStudentRecord();
                         break;
                 }
-                    
+
                     fflush(stdin);
                     if(ch2)
                         cin>>ch;
@@ -493,9 +623,9 @@ int main()
                         load();
                 }while(ch2!=0);
         }
-            
+
 	    if(ch1=='2')
-		{		
+		{
 			fflush(stdin);
 //			load();
             do
@@ -512,7 +642,7 @@ int main()
 	            cout<<"\t3.  Search Grades By Roll Number\n";
 	            cout<<"\t0.  Exit.\n";
                 cout<<"\nEnter your choice : ";
-						
+
                 cin>>w;
                 switch(w)
                 {
@@ -524,15 +654,81 @@ int main()
                         break;
                     case 3:
                         searchGradeByRollNo(2);
-                        break;                    
-                }                    
+                        break;
+                }
 	                fflush(stdin);
 	                if(w)
 	                    cin>>ch;
 	                else
 	                    load();
-           	}while(w!=0);			     
+           	}while(w!=0);
 		}
+	// Dibya's Code for Main Function
+		if(ch1=='3')
+		{
+			fflush(stdin);
+			CLS();
+
+			 RULE("*");
+                cout <<"\t\t\tSTUDENT INFORMATION SECTION";
+                RULE("*");
+                cout<<"\t\t\t    	PLACEMENT CELL";
+                RULE('-');
+
+			int n,m;
+			cout<<"Enter the number of Students wants to sit in placement: ";
+			cin>>n;
+			Students s[n];
+			cout<<endl;
+			RULE('-');
+			cout<<" \n\nEnter the Students details:- ";
+			RULE('-');
+			for(int i=0;i<n;i++)
+			{
+				s[i].getSData();
+			}
+
+			cout<<endl<<endl;
+			cout<<"\nEnter the number of Companies: ";
+			cin>>m;
+			company c[m];
+			RULE('-');
+			cout<<"\n\nEnter the company details: \n";
+			RULE('-');
+			for(int i=0;i<m;i++)
+			{
+				c[i].getCData();
+			}
+
+			placement p[m];
+			int count =0;
+			int scount[m];
+
+			for (int i = 0; i < m; ++i)
+			{
+				for(int j=0;j<n;j++)
+				{
+					if(c[i].ccgpa()>=s[j].scgpa())
+					{
+						count++;
+						p[i].putPlacementData(s[j].ssname(),c[i].cname(),s[j].sroll());
+
+					}
+				}
+				scount[i]=count;
+			}
+
+
+//			for(int j=0;j<m;j++)
+//			{
+//				cout<<"COMPANY NAME:  "<<c[j].cname();
+//				for(int i=0;i<scount[j];i++)
+//				{
+//					p[i].getData();
+//				}
+//			}
+		}
+
 
     }while(ch1!='0');
 	CLS();
