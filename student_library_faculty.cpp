@@ -462,7 +462,7 @@ public:
 
 void Students::getSData()
 {
-	ofstream fout("allStudentList.txt", ios::app);
+	ofstream fout("studentList.txt", ios::app);
 	cout << "\n\nEnter Name: ";
 	cin >> sname;
 	fout << sname << endl;
@@ -557,28 +557,6 @@ void placement::getData()
 	RULE('-');
 	cout << "\nName: " << name << endl;
 	cout << "Roll Number: " << rollnumber << endl;
-}
-
-// Students placed class
-
-class splaced
-{
-	char name[25];
-	char cname[20];
-	int package;
-	long rollnumber;
-public:
-	void getpData();
-	void putpData();
-};
-
-void splaced::getpData()
-{
-
-}
-void splaced::putpData()
-{
-
 }
 
 /*================================================================================*/
@@ -2596,15 +2574,15 @@ int main()
 					case 1:
 					{
 						CLS();
-						cout << "Enter the number of Students wants to sit in placement: ";
+						cout << "Enter the number of Students who want to sit in placement: ";
 						cin >> n;
 						cout << endl;
 						RULE('-');
-						cout << " \n\nEnter the Students details:- ";
+						cout << " \n\nEnter the Students details:- \n ";
 						RULE('-');
 						for (int i = 0; i < n; i++)
 						{
-							cout << "#####Student " << i + 1 << "#####" << endl;
+							cout << "##### Student " << i + 1 << " #####" << endl;
 							s[i].getSData();
 						}
 						cout << endl << endl;
@@ -2620,29 +2598,46 @@ int main()
 						RULE('-');
 						for (int i = 0; i < m; i++)
 						{
-							cout << "#####Company " << i + 1 << "#####" << endl;
+							cout << "##### Company " << i + 1 << " #####" << endl;
 							c[i].getCData();
 						}
 						break;
 					}
 					case 3:
 					{
-						int count = 0;
-						int scount[m];
-						CLS();
-						for (int i = 0; i < m; ++i)
+						cout << "\nEnter Company's Name: ";
+						char companyName[100];
+						cin.getline(companyName, 100);
+						char cName[100], sName[100];
+						int packageLPA, sRoll;
+						float minCGPA, sCGPA;
+						int eCount = 0;
+						ifstream fin("studentList.txt");
+						while (!(fin.eof()))
 						{
-							for (int j = 0; j < n; j++)
+							fin.getline(cName, 100);
+							fin >> packageLPA >> minCGPA;
+							if (strcmp(companyName, cName) == 0)
 							{
-								if (c[i].ccgpa() >= s[j].scgpa())
-								{
-									count++;
-									p[i].putPlacementData(s[j].ssname(), c[i].cname(), s[j].sroll());
-
-								}
+								break;
 							}
-							scount[i] = count;
 						}
+						fin.close();
+						ifstream fin2("companyList.txt");
+						while (!(fin2.eof()))
+						{
+							fin2.getline(sName, 100);
+							fin2 >> sRoll >> sCGPA;
+							if (sCGPA >= minCGPA)
+							{
+								eCount++;
+								cout << "##### Student " << eCount << " #####" << endl;
+								cout << "\n\nName: " << sName << endl;
+								cout << "\nRoll. No.: " << sRoll << endl;
+								cout << "\nCGPA: " << sCGPA << endl;
+							}
+						}
+						fin2.close();
 						break;
 					}
 					case 4:
@@ -2659,15 +2654,6 @@ int main()
 						cout << "\nInvalid Choice. Please try again.";
 						goto placementMenu;
 					}
-
-					//			for(int j=0;j<m;j++)
-					//			{
-					//				cout<<"COMPANY NAME:  "<<c[j].cname();
-					//				for(int i=0;i<scount[j];i++)
-					//				{
-					//					p[i].getData();
-					//				}
-					//			}
 					}
 				}
 			} while (ch1 != '0');
