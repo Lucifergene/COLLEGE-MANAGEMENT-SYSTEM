@@ -21,6 +21,7 @@ class Student
 	int title;  //Master  = 1, Mr = 2, Miss = 3
 	char studentName[30];
 	int rollNo;
+	int classop1;
 	char fatherName[30];
 	char motherName[30];
 	char address[80];
