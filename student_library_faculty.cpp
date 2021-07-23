@@ -2162,7 +2162,7 @@ class teacher
 	string section[10];
 	string subject;
 
-public:
+ public:
 
 	void input()
 	{
